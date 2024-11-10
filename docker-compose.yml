@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root     # Set the root password
+      MYSQL_DATABASE: user             # Set a default database to be created
+      MYSQL_USER: ismail                       # Set a custom MySQL user
+      MYSQL_PASSWORD: 1234          # Set password for the custom user
+    ports:
+      - "3307:3306"                           # Expose MySQL port to the host
+    volumes:
+      - mysql_data:/var/lib/mysql             # Persist data between container restarts
+    networks:
+      - mysql_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  mysql_network:
+    driver: bridge
